@@ -20,7 +20,7 @@ exports.handler = async () => {
         state: "FL",
         zip: "33012",
         country: "US",
-        phone: "3055551234",
+        phone: "7865551234",
         email: "test@example.com"
       },
       items: [
@@ -38,35 +38,6 @@ exports.handler = async () => {
         "x-api-key": process.env.ROASTIFY_API_KEY_TEST,
         "Content-Type": "application/json",
         "Idempotency-Key": "test-order-2"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const data = await response.json();
-
-    return {
-      statusCode: response.status,
-      body: JSON.stringify({
-        ok: response.ok,
-        status: response.status,
-        selectedGrind: grind,
-        selectedSku: sku,
-        data: data
-      })
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        ok: false,
-        message: error.message
-      })
-    };
-  }
-};      headers: {
-        "x-api-key": process.env.ROASTIFY_API_KEY_TEST,
-        "Content-Type": "application/json",
-        "Idempotency-Key": "test-order-1"
       },
       body: JSON.stringify(payload)
     });
