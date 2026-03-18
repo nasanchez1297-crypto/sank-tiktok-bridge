@@ -11,18 +11,22 @@ exports.handler = async () => {
 
     const payload = {
       externalSourceId: "netlify-test-order-1",
-      shippingAddress: {
+      toAddress: {
         name: "Test Customer",
-        address1: "123 Test St",
+        company: "SANK Test",
+        street1: "123 Test St",
+        street2: "",
         city: "Miami",
         state: "FL",
         zip: "33101",
-        country: "US"
+        country: "US",
+        phone: "3055551234",
+        email: "test@example.com"
       },
       items: [
         {
           sku: sku,
-          artworkUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80",
+          artworkUrl: "https://d13jwb0zul8vwm.cloudfront.net/catalog-products/_public/268770a2-c67d-4b63-b816-96cd2ee714f7.webp",
           quantity: 1
         }
       ]
