@@ -10,15 +10,15 @@ exports.handler = async () => {
     const sku = skuMap[grind];
 
     const payload = {
-      externalSourceId: "netlify-test-order-1",
+      externalSourceId: "netlify-test-order-2",
       toAddress: {
-        name: "Test Customer",
-        company: "SANK Test",
-        street1: "123 Test St",
+        name: "Nicolas Sanchez",
+        company: "SANK Coffee",
+        street1: "1337 W 49th Pl Apt 408",
         street2: "",
-        city: "Miami",
+        city: "Hialeah",
         state: "FL",
-        zip: "33101",
+        zip: "33012",
         country: "US",
         phone: "3055551234",
         email: "test@example.com"
@@ -35,6 +35,35 @@ exports.handler = async () => {
     const response = await fetch("https://api.roastify.app/v1/orders", {
       method: "POST",
       headers: {
+        "x-api-key": process.env.ROASTIFY_API_KEY_TEST,
+        "Content-Type": "application/json",
+        "Idempotency-Key": "test-order-2"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    return {
+      statusCode: response.status,
+      body: JSON.stringify({
+        ok: response.ok,
+        status: response.status,
+        selectedGrind: grind,
+        selectedSku: sku,
+        data: data
+      })
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        ok: false,
+        message: error.message
+      })
+    };
+  }
+};      headers: {
         "x-api-key": process.env.ROASTIFY_API_KEY_TEST,
         "Content-Type": "application/json",
         "Idempotency-Key": "test-order-1"
