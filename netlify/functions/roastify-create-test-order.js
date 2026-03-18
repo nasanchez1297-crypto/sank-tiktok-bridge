@@ -1,6 +1,6 @@
 exports.handler = async function () {
   try {
-    const grind = "whole_bean"; // cambia a "ground" si quieres probar molido
+    const grind = "whole_bean";
 
     const skuMap = {
       whole_bean: "COF-WHB-12O-COL-BOX",
@@ -18,23 +18,46 @@ exports.handler = async function () {
       },
       body: JSON.stringify({
         externalSourceId: `netlify-test-${Date.now()}`,
-        toAddress: {
+        shippingAddress: {
           name: "Test Customer",
-          company: "SANK Test",
-          street1: "123 Test St",
-          street2: "",
+          address1: "123 Test St",
           city: "Miami",
           state: "FL",
           zip: "33101",
-          country: "US",
-          phone: "3055551234",
-          email: "test@example.com"
+          country: "US"
         },
         items: [
           {
             sku: sku,
+            artworkUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80",
             quantity: 1
           }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    return {
+      statusCode: response.status,
+      body: JSON.stringify({
+        ok: response.ok,
+        status: response.status,
+        selectedGrind: grind,
+        selectedSku: sku,
+        data
+      })
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        ok: false,
+        message: error.message
+      })
+    };
+  }
+};          }
         ]
       })
     });
