@@ -26,7 +26,7 @@ exports.handler = async () => {
       items: [
         {
           sku: sku,
-          artworkUrl: "https://d13jwb0zul8vwm.cloudfront.net/catalog-products/_public/268770a2-c67d-4b63-b816-96cd2ee714f7.webp",
+          artworkUrl: "https://sankcoffee-connect.netlify.app/test.jpg",
           quantity: 1
         }
       ]
