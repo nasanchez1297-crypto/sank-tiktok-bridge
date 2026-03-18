@@ -73,6 +73,45 @@ exports.handler = async (event) => {
       })
     };
   }
+};        {
+          sku: sku,
+          artworkUrl: "https://sankcoffee-connect.netlify.app/test.jpg",
+          quantity: 1
+        }
+      ]
+    };
+
+    const response = await fetch("https://api.roastify.app/v1/orders", {
+      method: "POST",
+      headers: {
+        "x-api-key": process.env.ROASTIFY_API_KEY_TEST,
+        "Content-Type": "application/json",
+        "Idempotency-Key": `test-order-${grind}-${Date.now()}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    return {
+      statusCode: response.status,
+      body: JSON.stringify({
+        ok: response.ok,
+        status: response.status,
+        selectedGrind: grind,
+        selectedSku: sku,
+        data: data
+      })
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        ok: false,
+        message: error.message
+      })
+    };
+  }
 };      headers: {
         "x-api-key": process.env.ROASTIFY_API_KEY_TEST,
         "Content-Type": "application/json",
